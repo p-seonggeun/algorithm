@@ -12,6 +12,8 @@ def solution(s):
                 if l :
                     if l[-1] == '(' :
                         l.pop()
+                else :
+                    print(l)
             else :
                 l.append(s[i])
     if l :
