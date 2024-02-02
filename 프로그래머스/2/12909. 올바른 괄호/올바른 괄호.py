@@ -13,7 +13,7 @@ def solution(s):
                     if l[-1] == '(' :
                         l.pop()
                 else :
-                    print(l)
+                    return False
             else :
                 l.append(s[i])
     if l :
