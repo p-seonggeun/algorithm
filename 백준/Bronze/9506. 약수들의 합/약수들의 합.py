@@ -6,7 +6,6 @@ while True :
     
     if sum(l) == n :
         print(n, "= ", end = "")
-        l = [str(i) for i in l]
-        print(' + '.join(l))
+        print(*l, sep = " + ")
     else :
         print(n, "is NOT perfect.")
