@@ -25,6 +25,7 @@ def solution(enroll, referral, seller, amount) :
             if key == '-' :
                 d[key] += value
     
+    
     for i, j in d.items() :
         if i != '-' :
             answer.append(j)
