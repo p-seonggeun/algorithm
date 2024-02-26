@@ -1,13 +1,12 @@
 def solution(elements):
-    answer = set()
-    length = len(elements)
-    answer.add(sum(elements))
-    elements = elements + elements
+    answer = 0
+    s = set()
+    for i in range(len(elements)) :
+        temp = elements[i]
+        s.add(temp)
+        for j in range(i + 1 , i + len(elements)) :
+            temp += elements[j % len(elements)]
+            s.add(temp)
     
-    for i in range(1, length) :
-        for j in range(len(elements)) :
-            if j - length == i :
-                break
-            answer.add(sum(elements[j : j + i]))
-    answer = len(answer)
+    answer = len(s)
     return answer
