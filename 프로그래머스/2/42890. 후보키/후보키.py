@@ -4,20 +4,10 @@ def solution(relation):
     answer = 0
     column = len(relation[0])
     row = len(relation)
-    rotate = [[] for i in range(column)]
-    length_key = [[] for i in range(column + 1)]
-    dictionary = {}
-    comlist = []
+    comlist = [i for i in range(column)]
     key_set = set()
-    for i in range(column) :
-        for j in range(row) :
-            rotate[i].append(relation[j][i])
-    
-    for index, i in enumerate(rotate) :
-        comlist.append(index)
     
     for i in range(1, column + 1) :
-        d = []
         for j in (list(combinations(comlist, i))) :
             s = []
             for l in range(row) :
@@ -45,17 +35,7 @@ def solution(relation):
                             break
                     if flag :
                         key_set.add(tuple(j))
-            d.append(s)
     
     answer = len(key_set)
-
-#     for i in range(row) : # 행
-#         for j in range(1, column + 1) : # 몇개 뽑을지
-#             for k in range(column - j + 1) : # 시작위치
-#                 insert = relation[i][k : k + j]
-#                 length_key[len(insert)].append(insert)
-    
-#     for i in length_key :
-#         print(i)
     
     return answer
