@@ -5,7 +5,7 @@ def solution(files):
         head = ''
         number = ''
         tail = ''
-        h_index, n_index, t_index = 0, 0, 0
+        h_index, n_index, t_index = 0, len(i), 0
         
         for index, j in enumerate(i) :
             if j.isdigit() :
@@ -18,9 +18,6 @@ def solution(files):
             if not i[j].isdigit() :
                 n_index = j
                 break
-        
-        if n_index == 0 :
-            n_index = len(i)
 
         number = i[h_index:n_index]
         
