@@ -3,9 +3,9 @@ input = sys.stdin.readline
 
 def dfs(n, cnt) :
     global answer
-    # # 가지 치기(끝까지 진행해도 정답 갱신이 불가능 한 경우)
-    # if answer >= (cnt + (N - n) * 2) :
-    #     return
+    # 가지 치기(끝까지 진행해도 정답 갱신이 불가능 한 경우)
+    if answer >= (cnt + (N - n) * 2) :
+        return
     if n == N : # 종료 조건
         answer = max(answer, cnt)
         return
