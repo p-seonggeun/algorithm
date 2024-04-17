@@ -10,13 +10,7 @@ for i in range(1, N + 1) :
         if int(j) % 3 == 0 and j != '0' :
             temp += '-'
             flag = False
-    if i != N : 
-        if flag :
-            print(i, end = " ")
-        else :
-            print(temp, end = " ")
+    if flag :
+        print(i, end = " ")
     else :
-        if flag :
-            print(i)
-        else :
-            print(temp)
+        print(temp, end = " ")
