@@ -11,12 +11,11 @@ while s <= e :
         break
     e += 1
     if l[e] in d :
-        delete = []
-        for key, value in d.items() :
-            if value < d[l[e]] :
-                delete.append(key)
-        for i in delete :
-            del d[i]
+        if s > d[l[e]] :
+            answer += e - s + 1
+            d[l[e]] = e
+            continue
+        
         s = d[l[e]] + 1
         answer += e - s + 1
         d[l[e]] = e
