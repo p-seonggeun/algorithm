@@ -11,15 +11,15 @@ N = int(input())
 distance = list(map(int, input().split()))
 price = list(map(int, input().split()))
 
-answer += (distance[0] * price[0])
-me = 1
+answer = 0
+me = 0
 while me != N - 1 :
     if me == N - 1 :
         break
 
     for i in range(me + 1, N) :
         if price[me] > price[i] :
-            answer += (sum(distance[me : i + 1]) * price[me])
+            answer += (sum(distance[me : i]) * price[me])
             me = i
             break
     else :
