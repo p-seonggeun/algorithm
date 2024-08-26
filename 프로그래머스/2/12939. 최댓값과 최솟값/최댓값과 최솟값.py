@@ -1,5 +1,4 @@
 def solution(s):
-    s = list(map(int, s.split(' ')))
-    mi, ma = min(s), max(s)
-    result = str(mi) + " " + str(ma)
-    return result
+    t = list(map(int, s.split(" ")))
+    answer = str(min(t)) + " " + str(max(t))
+    return answer
