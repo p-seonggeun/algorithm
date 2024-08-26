@@ -1,7 +1,10 @@
 def solution(A,B):
     answer = 0
-    A.sort()
-    B.sort(reverse = True)
-    for a, b in zip(A, B) :
-        answer += a * b
+    
+    A.sort(reverse = True)
+    B.sort()
+    
+    for i in range(len(A)) :
+        answer += A.pop() * B.pop()
+
     return answer
