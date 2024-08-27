@@ -5,8 +5,7 @@ def solution(n):
     d[2] = 2
     
     for i in range(3, 2001) :
-        d[i] = (d[i - 1] + d[i - 2]) % 1234567
-
-    answer = d[n]
-    
+        d[i] = d[i - 2] + d[i - 1]
+        
+    answer = d[n] % 1234567
     return answer
