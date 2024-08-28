@@ -1,12 +1,9 @@
 def solution(elements):
     answer = 0
     s = set()
-    for i in range(len(elements)) :
-        temp = elements[i]
-        s.add(temp)
-        for j in range(i + 1 , i + len(elements)) :
-            temp += elements[j % len(elements)]
-            s.add(temp)
-    
-    answer = len(s)
-    return answer
+    elements = elements * 2
+    for i in range(1, len(elements) // 2 + 1) :
+        for j in range(1, len(elements) // 2 + 1) :
+            s.add(sum(elements[i:i + j]))
+        
+    return len(s)
