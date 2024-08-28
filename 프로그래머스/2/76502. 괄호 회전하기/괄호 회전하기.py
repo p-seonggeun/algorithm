@@ -1,23 +1,24 @@
-from collections import deque
+def check(l) :
+    t = []
+    l = list(l)
+    for i in l :
+        if not t:
+            t.append(i)
+        else :
+            if (i == ')' and t[-1] =='(') or (i == ']' and t[-1] == '[') or (i == '}' and t[-1] == '{') :
+                t.pop()
+            else :
+                t.append(i)
+    if t : return False
+    else : return True
+            
+from collections import deque            
 def solution(s):
     answer = 0
-    s = list(s)
-    s = deque(s)
+    queue = deque(s)
     for i in range(len(s)) :
-        s.rotate(-1)
-        temp = []
-        for i in list(s) :
-            if len(temp) != 0 :
-                if i == ')' and temp[-1] == '(' :
-                    temp.pop()
-                elif i == ']' and temp[-1] == '[' :
-                    temp.pop()
-                elif i == '}' and temp[-1] == '{' :
-                    temp.pop()
-                else :
-                    temp.append(i)
-            else :
-                temp.append(i)
-        if len(temp) == 0 :
+        queue.rotate(-i)
+        if check(queue) :
             answer += 1
+        queue.rotate(i)
     return answer
