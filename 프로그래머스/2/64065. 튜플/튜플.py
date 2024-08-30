@@ -2,30 +2,29 @@ def solution(s):
     answer = []
     s = s[1:]
     s = s[:len(s) - 1]
+    
     l = []
-    temp = []
-    n = ''
-    for i in s :
+    st = ''
+    for index, i in enumerate(s) :
         if i == '{' :
-            continue
-        elif i == '}' :
-            temp.append(int(n))
-            n = ''
-            l.append(temp)
-            temp = []
+            t = []
+            st = ''
+        elif i.isnumeric() :
+            st += i
         elif i == ',' :
-            if n != '' :
-                temp.append(int(n))
-                n = ''
-        else :
-            n += i
-            
+            t.append(st)
+            st = ''
+        elif i == '}' :
+            if index == len(s) - 1 :
+                t.append(st)
+            l.append(t)
+    
     l.sort(key = lambda x : len(x))
+    
+    s = []
     
     for i in l :
         for j in i :
-            if j not in answer :
-                answer.append(j)
-            
-    
-    return answer
+            if int(j) not in s :
+                s.append(int(j))
+    return s
