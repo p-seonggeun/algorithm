@@ -1,24 +1,29 @@
 from collections import deque
 def solution(priorities, location):
     answer = 0
-    prior = deque()
+    l = []
+    
+    stand = []
     for index, i in enumerate(priorities) :
-        prior.append([index, i])
+        l.append([i, index])
+        if index == location :
+            stand = [i, index]
     
-    while prior :
-        now = prior.popleft()
-        exe = True
     
-        for i in prior :
-            if now[1] < i[1] :
-                exe = False
+    priorities.sort(reverse = True)
+    
+    queue_p = deque(priorities)
+    queue = deque(l)
+    count = 0
+    
+    while True :
+        t = queue.popleft()
+        if t[0] == queue_p[0] :
+            queue_p.popleft()
+            count += 1
+            if t[1] == stand[1] :
                 break
-        if not exe :
-            prior.append(now)
         else :
-            answer += 1
-            if now[0] == location :
-                return answer
+            queue.append(t)
     
-    
-    return answer
+    return count
