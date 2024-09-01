@@ -1,28 +1,53 @@
-from math import sqrt
+
+
+def isPrime(number) :
+    if number <= 1 :
+        return False
+    count = 0
+    number = int(number)
+    for i in range(2, int(number ** 0.5) + 1) :
+        if number % i == 0 :
+            return False
+    return True
+
+def change(number, k) :
+    l = []
+    while number >= 1 :
+        l.append(str(number % k))
+        number //= k
+    
+    return ''.join(l[::-1])
+
 def solution(n, k):
     answer = 0
     
-    def prime(n) :
-        if n == 1 or n == 0 :
-            return False
-        for i in range(2, int(sqrt(n)) + 1) :
-            if n % i == 0 :
-                return False
-        return True
+    t = change(n, k)
+    l = []
+    s = ''
+    for i in range(len(t)) :
+        if t[i] != '0' :
+            s += t[i]
+        else :
+            if s :
+                l.append(s)
+                s = ''
+                l.append('0')
+            else : l.append('0')
+    else :
+        if s : l.append(s)
     
-    temp = []
-    while (n > 0) :
-        temp.append(str(n % k))
-        n = n // k
-    temp = temp[::-1]
-    temp = ''.join(temp)
+    l = list(map(int, l))
     
-    temp = temp.split("0")
-    print(temp)
-    for i in temp :
-        if i == '' :
-            continue
-        if prime(int(i)) :
-            answer += 1
+    for index, i in enumerate(l) :
+        if isPrime(i) :
+            if len(l) == 1 :
+                answer += 1
+            else :
+                if index == 0 :
+                    if l[index + 1] == 0 : answer += 1
+                elif index == len(l) - 1 :
+                    if l[index - 1] == 0 : answer += 1
+                elif len(l) >= 3 :
+                    if l[index - 1] == l[index + 1] == 0 : answer += 1
     
     return answer
