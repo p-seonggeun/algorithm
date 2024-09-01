@@ -1,22 +1,22 @@
 def solution(numbers):
     answer = []
-    temp = []
-    for i in range(len(numbers)) :
-        if not temp :
-            temp.append(numbers.pop())
+    stack = []
+    
+    while numbers :
+        t = numbers.pop()
+        if not stack :
             answer.append(-1)
+            stack.append(t)
         else :
-            t = numbers.pop()
-            if t < temp[-1] :
-                answer.append(temp[-1])
-                temp.append(t)
+            while stack and stack[-1] <= t :
+                stack.pop()
+            
+            if not stack :
+                answer.append(-1)
+                stack.append(t)
             else :
-                while temp and t >= temp[-1] :
-                    temp.pop()
-                if temp :
-                    answer.append(temp[-1])
-                else :
-                    answer.append(-1)
-                temp.append(t)
-
+                answer.append(stack[-1])
+                stack.append(t)
+            
+    
     return answer[::-1]
