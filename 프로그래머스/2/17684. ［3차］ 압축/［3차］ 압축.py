@@ -1,25 +1,22 @@
 def solution(msg):
     answer = []
-    dict_word = {}
+    d = {}
+    for i in range(65, 91) :
+        d[chr(i)] = i - 64
+    val = 27
     
-    for i in range(1, 27) :
-        dict_word[chr(64 + i)] = i
-    
-    dict_val = 27
-    s = ''
-    for i in range(len(msg)) :
-        w = msg[i]
-        if len(s) > i :
-            continue
-        for j in range(i + 1, len(msg)) :
-            c = msg[j]
-            if w + c in dict_word :
-                w += c
+    while msg != '' :
+        w = ''
+        for i in range(len(msg)) :
+            if w + msg[i] in d :
+                w += msg[i]
             else :
-                dict_word[w + c] = dict_val
-                dict_val += 1
+                answer.append(d[w])
+                d[w + msg[i]] = val
+                val += 1
+                msg = msg[len(w):]
                 break
-        s += w
-        answer.append(dict_word[w])
-
+        else :
+            answer.append(d[w])
+            break
     return answer
