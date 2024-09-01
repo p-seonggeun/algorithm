@@ -1,28 +1,25 @@
 def solution(topping):
     answer = 0
-    d_c = {}
-    for i in topping :
-        if i in d_c :
-            d_c[i] += 1
-        else : d_c[i] = 1
+    d = {}
     
-    index = len(topping) - 1
-    d_d = {}
-    while index >= 0 :
-        if index == -1 :
-            break
+    for i in topping :
+        if i in d : d[i] += 1
+        else : d[i] = 1
+    
+    b = {}
+    for index, i in enumerate(topping) :
+        if i in b : 
+            b[i] += 1
+        else : b[i] = 1
         
-        if d_c[topping[index]] > 0 :
-            d_c[topping[index]] -= 1
-            if d_c[topping[index]] == 0 :
-                del d_c[topping[index]]
+        if i in d :
+            if d[i] >= 1 :
+                d[i] -= 1
         
-        if topping[index] in d_d :
-            d_d[topping[index]] += 1
-        else : d_d[topping[index]] = 1
+        if d[i] == 0 :
+            del d[i]
         
-        if len(d_c) == len(d_d) : answer += 1
+        if len(d) == len(b) : answer += 1
         
-        index -= 1
         
     return answer
