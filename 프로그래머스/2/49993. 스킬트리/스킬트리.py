@@ -1,21 +1,18 @@
 def solution(skill, skill_trees):
     answer = 0
-    def check(s1, s2) :
-        for i, j in zip(s1, s2) :
-            if i != j :
-                return False
-        return True
+    skill = list(skill[::-1])
     
     for i in skill_trees :
-        temp = []
-        l = list(i)
-        while l :
-            t = l.pop()
-            if t in skill :
-                temp.append(t)
-        
-        temp = ''.join(temp[::-1])
-        
-        if check(temp, skill) :
+        a = list(i[::-1])
+        b = skill[::]
+        flag = True
+        while a :
+            t = a.pop()
+            if t in b :
+                if b.pop() != t :
+                    flag = False
+                    break
+        if flag :
             answer += 1
+                    
     return answer
