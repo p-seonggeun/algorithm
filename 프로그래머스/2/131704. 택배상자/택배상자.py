@@ -1,21 +1,21 @@
 def solution(order):
     answer = 0
-    final = []
-    middle = []
-    count = 0
-    
+    f = []
+    m = []
+    c = 0
     for i in range(1, len(order) + 1) :
-        if i != order[count] :
-            middle.append(i)
+        if i != order[c] :
+            m.append(i)
         else :
-            final.append(i)
-            count += 1
-            while middle and middle[-1] == order[count] :
-                final.append(middle.pop())
-                count += 1
-    
-    while middle and middle[-1] == order[count] :
-        final.append(middle.pop())
-        count += 1
-    
-    return len(final)
+            f.append(i)
+            c += 1
+            while m and m[-1] == order[c] :
+                f.append(m.pop())
+                c += 1
+                
+    while m and m[-1] == order[c] :
+        f.append(m.pop())
+        c += 1
+
+    answer = len(f)
+    return answer
