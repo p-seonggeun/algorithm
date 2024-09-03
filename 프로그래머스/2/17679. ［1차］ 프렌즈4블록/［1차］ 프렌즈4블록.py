@@ -1,85 +1,61 @@
-import sys
-sys.setrecursionlimit(10 ** 9)
-di = [0, 1, 1, 0, 1, -1, -1, -1]
-dj = [1, 0, 1, -1, -1, 0, -1, 1]
+def dot(m, n, l) :
+    c = 0
+    for i in range(m) :
+        for j in range(n) :
+            if l[i][j] == '.' : c += 1
+    return c
 
-def dfs(board, target, i, j, m, n, visited) :
-    if i < 0 or i >= (m - 1) or j < 0 or j >= (n - 1) :
-        return False
-    if visited[i][j] :
-        return False
-    visited[i][j] = True
+def down(m, n, l) :
+    board = []
+    for i in range(n) :
+        t = []
+        for j in range(m) :
+            if l[j][i] == '.' :
+                t.insert(0, l[j][i])
+            else :
+                t.append(l[j][i])
+        board.append(t)
     
-    if board[i][j] == target :
-        if (
-            target == board[i + di[0]][j + dj[0]] 
-                   == board[i + di[1]][j + dj[1]] 
-                   == board[i + di[2]][j + dj[2]] 
-        ) :
-            top = dfs(board, target, i + di[5], j + dj[5], m, n, visited)
-            right_top = dfs(board, target, i + di[7], j + dj[7], m, n, visited)
-            right = dfs(board, target, i + di[0], j + dj[0], m, n, visited)
-            right_down = dfs(board, target, i + di[2], j + dj[2], m, n, visited)
-            down = dfs(board, target, i + di[1], j + dj[1], m, n, visited)
-            left_down = dfs(board, target, i + di[4], j + dj[4], m, n, visited)
-            left = dfs(board, target, i + di[3], j + dj[3], m, n, visited)
-            left_top = dfs(board, target, i + di[6], j + dj[6], m, n, visited)
-            board[i][j] = '.'
-            board[i][j + 1] = '.'
-            board[i + 1][j] = '.'
-            board[i + 1][j + 1] = '.'
-            return True
-        return False
-    
-def solution(m, n, board) :
+    for i in range(m) :
+        for j in range(n) :
+            l[i][j] = board[j][i]
+
+def boom(block, l) :
+    while block :
+        m, n = block.pop()
+        for i in range(m, m + 2) :
+            for j in range(n, n + 2) :
+                l[i][j] = '.'
+                
+
+def check(m, n, board) :
+    stand = board[m][n]
+    for i in range(m, m + 2) :
+        for j in range(n, n + 2) :
+            if stand != board[i][j] :
+                return []
+    return [m, n]
+
+def solution(m, n, board):
     answer = 0
-    board = [list(i) for i in board]
-    count = 0
-    
-    # print("원본")
-    # for i in board :
-    #     print(i)
-    # print()
-    while count != 900 :
-        visited = [[False] * n for _ in range(m)]
-        count += 1
+    l = []
+    for i in board :
+        l.append(list(i))
+    flag = True
+    while flag : 
+        b = []
         for i in range(m - 1) :
             for j in range(n - 1) :
-                if board[i][j] == '.' :
-                    continue
-                # if board[i][j].isalpha() and board[i][j].isupper() and not visited[i][j] :
-                target = board[i][j]
-                dfs(board, target, i, j, m, n, visited)
+                if l[i][j] != '.' :
+                    t = check(i, j, l)
+                    if t :
+                        b.append(t)
         
-        # print(count, "번째 지운 후")
-        # for i in board :
-        #     print(i)
-        # print()
-        
-        temp_board = []
-        for i in range(n) :
-            temp = []
-            for j in range(m) :
-                if board[j][i] == '.' :
-                    temp.insert(0, board[j][i])
-                else :
-                    temp.append(board[j][i])
-            temp_board.append(temp)
-        
-        # print(count, "temp_board")
-        # for i in temp_board :
-        #     print(i)
-        # print()
+        if len(b) == 0 :
+            break
+
+        boom(b, l)
+        down(m, n, l)
     
-        for i in range(m) :
-            for j in range(n) :
-                board[i][j] = temp_board[j][i]
-    
-        # print(count, "번째 내린 후")
-        # for i in board :
-        #     print(i)
-        # print()
-        
-    for i in board :
-        answer += i.count('.')
+    answer = dot(m, n, l)
     return answer
