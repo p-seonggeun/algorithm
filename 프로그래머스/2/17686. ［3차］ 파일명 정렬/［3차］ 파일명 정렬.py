@@ -1,36 +1,29 @@
 def solution(files):
     answer = []
-    temp = []
-    for i in files :
-        head = ''
-        number = ''
-        tail = ''
-        h_index, n_index, t_index = 0, len(i), 0
-        
-        for index, j in enumerate(i) :
-            if j.isdigit() :
-                h_index = index
-                break
-        
-        head = i[:h_index]
-        
-        for j in range(h_index, len(i)) :
-            if not i[j].isdigit() :
-                n_index = j
-                break
-
-        number = i[h_index:n_index]
-        
-        if len(head + number) == len(i) :
-            tail = ''
-        else :
-            tail = i[n_index:]
-            
-        temp.append([head, number, tail, i])
+    l = []
     
-    temp = sorted(temp, key = lambda x : (x[0].lower(), int(x[1])))
+    for i in files :
+        h, n, t = '', '', ''
+        index = 0
+        while not (i[index].isnumeric()) :
+            h += i[index]
+            index += 1
         
-    for i in temp :
-        answer.append(i[-1])
+        while len(n) <= 5 and i[index].isnumeric() :
+            n += i[index]
+            index += 1
+            if index == len(i) :
+                break
+        else :
+            t = i[index:]
         
+        
+        l.append([h, n, t])
+    
+    l.sort(key = lambda x : (x[0].lower(), int(x[1])))
+    
+    for i in l :
+        answer.append(''.join(i))
+                
+    
     return answer
