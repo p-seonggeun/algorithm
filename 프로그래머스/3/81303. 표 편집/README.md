@@ -1,10 +1,10 @@
 # [level 3] 표 편집 - 81303 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/81303#) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/81303) 
 
 ### 성능 요약
 
-메모리: 245 MB, 시간: 959.55 ms
+메모리: 143 MB, 시간: 255.05 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2024년 03월 21일 18:14:25
+2024년 12월 05일 15:02:00
 
 ### 문제 설명
 
