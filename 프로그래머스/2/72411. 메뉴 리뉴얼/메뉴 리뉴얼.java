@@ -1,7 +1,7 @@
 import java.util.*;
 
 class Solution {
-public static String[] solution(String[] orders, int[] course) {
+    public static String[] solution(String[] orders, int[] course) {
         Map<String, Integer> map = new HashMap<>();
         for (int i = 0; i < orders.length; i++) {
             for (int j = 0; j < course.length; j++) {
@@ -41,11 +41,15 @@ public static String[] solution(String[] orders, int[] course) {
         return answer.toArray(String[]::new);
     }
 
-    public static void dfs(String[] target, int r, int start, 
+    public static void dfs(String[] target, int r, int start,
                            List<String> current, Map<String, Integer> result) {
         if (current.size() == r) {
-            result.put(String.join("", current), 
-                       result.getOrDefault(String.join("", current), 0) + 1);
+            result.put(String.join("", current),
+                    result.getOrDefault(String.join("", current), 0) + 1);
+            return;
+        }
+
+        if (target.length - start < r - current.size()) {
             return;
         }
 
