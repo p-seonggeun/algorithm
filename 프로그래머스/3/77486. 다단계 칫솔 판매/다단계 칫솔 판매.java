@@ -71,13 +71,5 @@ class Solution {
         public int getMoney() {
             return money;
         }
-
-        @Override
-        public String toString() {
-            return "Person{" +
-                    "name='" + name + '\'' +
-                    ", money=" + money +
-                    '}';
-        }
     }
 }
