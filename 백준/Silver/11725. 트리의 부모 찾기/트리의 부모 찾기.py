@@ -6,7 +6,7 @@ n = int(input())
 l = [[] for _ in range(n + 1)]
 visited = [False] * (n + 1)
 dict = {}
-result = [[] for _ in range(n + 1)]
+
 for _ in range(n - 1) :
     node1, node2 = map(int, input().split())
     l[node1].append(node2)
