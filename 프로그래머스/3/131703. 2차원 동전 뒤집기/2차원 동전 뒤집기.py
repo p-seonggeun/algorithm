@@ -51,7 +51,6 @@ def solution(beginning, target):
             if board[0][i] == 0:
                 count += 1
         
-        print("check2 count:", count)
         return count
     
     def check3(): # 0,0 -> 1일때 행과 열 둘 다 돌리는 경우
@@ -65,7 +64,6 @@ def solution(beginning, target):
             if board[0][i] == 1:
                 count += 1
         # 마지막 +2
-        print("check3 count:", count + 2)
         return count + 2
     
     def check4(): # 0,0 -> 0일때 열을 돌리는 경우
@@ -78,7 +76,6 @@ def solution(beginning, target):
                 count += 1
         
         # 마지막 +1
-        print("check4 count:", count + 1)
         return count + 1
     
     def check5(): # 0,0 -> 0일때 행 돌리는 경우
@@ -89,22 +86,10 @@ def solution(beginning, target):
         for i in range(1, col): # 0행의 1인거 세기
             if board[0][i] == 1:
                 count += 1
-        
-        print("check5 count:", count + 1)
+    
         return count + 1
     
-    def check():
-        for i in range(row):
-            for j in range(col):
-                if board[i][j] == 0:
-                    return False
-        return True
-    
     answer = check1()
-    for i in board:
-        print(i)
-    
-    print("answer:", answer)
     if answer == -1:
         return answer
     else:
