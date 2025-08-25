@@ -1,22 +1,13 @@
+from itertools import product
 def solution(word):
-    global c
     answer = 0
-    d = ['A', 'E', 'I', 'O', 'U']
-    p = {}
-    c = 1
-    t = []
-    def dfs(count) :
-        global c
-        if count == 5 :
-            return
+    aeiou = ['A','E','I','O','U']
     
-        for i in range(len(d)) :
-            t.append(d[i])
-            p[''.join(t[::])] = c
-            c += 1
-            dfs(count + 1)
-            t.pop()
+    l = []
+    for i in range(1, 6):
+        for j in product(aeiou, repeat = i):
+            l.append(''.join(list(j)))
+    l.sort()
     
-    dfs(0)
-    answer = p[word]
+    answer = l.index(word) + 1
     return answer
