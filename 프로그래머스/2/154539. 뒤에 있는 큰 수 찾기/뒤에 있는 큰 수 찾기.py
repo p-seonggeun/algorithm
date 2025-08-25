@@ -1,22 +1,14 @@
 def solution(numbers):
-    answer = []
-    stack = []
+    answer = [-1] * len(numbers)
     
-    while numbers :
-        t = numbers.pop()
-        if not stack :
-            answer.append(-1)
-            stack.append(t)
-        else :
-            while stack and stack[-1] <= t :
-                stack.pop()
-            
-            if not stack :
-                answer.append(-1)
-                stack.append(t)
-            else :
-                answer.append(stack[-1])
-                stack.append(t)
-            
-    
-    return answer[::-1]
+    l = []
+    for i in range(len(numbers) - 1, -1, -1):
+        n = numbers[i]
+        
+        while l and l[-1] <= n:
+            l.pop()
+        if l:
+            answer[i] = l[-1]
+        
+        l.append(n)
+    return answer
