@@ -1,57 +1,53 @@
 def solution(str1, str2):
     answer = 0
-    l1, l2 = [], []
+    a = []
+    for i in range(len(str1) - 1):
+        if not str1[i].isalpha() or not str1[i+1].isalpha():
+            continue
+        a.append(str1[i:i+2].lower())
     
-    for i in range(len(str1) - 1) :
-        t = str1[i : i + 2]
-        if t.isalpha() :
-            l1.append(t.lower())
+    b = []
+    for i in range(len(str2) - 1):
+        if not str2[i].isalpha() or not str2[i+1].isalpha():
+            continue
+        b.append(str2[i:i+2].lower())
     
-    for i in range(len(str2) - 1) :
-        t = str2[i : i + 2]
-        if t.isalpha() :
-            l2.append(t.lower())
+    print(a, b)
     
-    d1, d2 = {}, {}
-    for i in l1 :
-        if i in d1 :
-            d1[i] += 1
-        else : d1[i] = 1
-    
-    for i in l2 :
-        if i in d2 :
-            d2[i] += 1
-        else : d2[i] = 1
-    
-    print(d1, d2)
-    s = set()
-    for i in l1 :
-        if i not in s :
-            s.add(i)
-    
-    for i in l2 :
-        if i not in s :
-            s.add(i)
-    
-    union, intersection = [], []
-    for i in s :
-        if i in d1 and i in d2 :
-            for _ in range(min(d1[i], d2[i])) :
-                intersection.append(i)
-            for _ in range(max(d1[i], d2[i])) :
-                union.append(i)
-        else :
-            if i in d1 :
-                for _ in range(d1[i]) :
-                    union.append(i)
-            else :
-                for _ in range(d2[i]) :
-                    union.append(i)
-    
-    if intersection and union :
-        answer = int((len(intersection) / len(union)) * 65536)
-    elif intersection or (intersection == union):
+    if len(a) == len(b) == 0:
         return 65536
-    else :
-        return 0
+    c = {}
+    d = {}
+    
+    for i in a:
+        if i in c:
+            c[i] += 1
+        else:
+            c[i] = 1
+    for i in b:
+        if i in d:
+            d[i] += 1
+        else:
+            d[i] = 1
+    print(c, d)
+    
+    e = set()
+    for i in a + b:
+        e.add(i)
+    print(e)
+    
+    a = 0
+    b = 0
+    for i in e:
+        if i in c and i in d:
+            a += min(c[i], d[i])
+    for i in e:
+        if i in c and i in d:
+            b += max(c[i], d[i])
+        elif i in c:
+            b += c[i]
+        elif i in d:
+            b += d[i]
+            
+    answer = int((a / b) * 65536)
     return answer
