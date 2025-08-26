@@ -2,20 +2,18 @@ import heapq
 def solution(scoville, K):
     answer = 0
     
-    heapq.heapify(scoville)
-    
-    while True :
-        try :
-            a = heapq.heappop(scoville)
-            if a >= K :
-                break
-            b = heapq.heappop(scoville)
-        except :
-            return -1
+    h = []
+    for i in scoville:
+        heapq.heappush(h, i)
         
-    
-        c = a + (b * 2)
-        heapq.heappush(scoville, c)
+    while len(h) >= 2 and h[0] < K:
+        a = heapq.heappop(h)
+        b = heapq.heappop(h)
+        c = a + (2 * b)
+        
+        heapq.heappush(h, c)
         answer += 1
     
+    if h[0] < K:
+        return -1
     return answer
