@@ -1,9 +1,9 @@
-answer = 0
-temp = []
-last = []
 def solution(user_id, banned_id):
+    answer = 0
+    temp = []
+    last = []
     def dfs(index):
-        global answer, temp, last
+        nonlocal answer, temp, last
         if len(temp) == len(banned_id):
             t = sorted(temp)
             if t not in last:
